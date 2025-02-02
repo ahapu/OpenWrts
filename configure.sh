@@ -19,8 +19,15 @@ echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-pa
 echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> feeds.conf.default
 
 # iStore
-echo "src-git istore https://github.com/linkease/istore;main" >> feeds.conf.default
+# echo "src-git istore https://github.com/linkease/istore;main" >> feeds.conf.default
 
 # 替换默认主题
 rm -rf package/lean/luci-theme-argon 
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/lean/luci-theme-argon
+
+# Add luci-theme
+rm -rf package/lean/luci-theme-argon 
+git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git package/lean/luci-app-argon-config
+rm -rf package/lean/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
+cp -f $GITHUB_WORKSPACE/asset/bg1.jpg package/lean/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
